@@ -3,8 +3,11 @@ Version 1 de développement permettant un test par un employé du groupe.
 
 ## Développement du Projet :
 Backend : NodeJS + express + sequelize Base de données : MySQL ;
+
 Backend_Package : (bcrypt, body-parser, crypto-js,dotenv, express , jsonwebtoken, multer ,nodemon)
+
 Frontend : VueJS3 + vue-cli + Vuex , bootstrap ;
+
 Frontend_Package : (axios , moment , vue-router , Vuex)
 ## Back-end :
 
