@@ -1,0 +1,18 @@
+{
+    "development": {
+      "database": "database_development_groupmania",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "test": {
+      "database": "database_test_groupmania",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    },
+    "production": {
+      "database": "database_production_groupmania",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
+  }
+  
