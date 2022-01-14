@@ -9,7 +9,7 @@
           {{uploadPhotoErro}}
       </div>
       <!--Déclencher l'évenement @change si l'utilisateur ajoute l'img 1er fois  -->
-      <input type="file" accept=".jpg, .jpeg, .png" id="imageInput" hidden @change="handleImageChange">
+      <input type="file" accept=".jpg, .jpeg, .png" id="imageInput"  ref="fileInput" hidden @change="handleImageChange">
        <!--Déclencher l'évenement @change si l'utilisateur edit L'image -->
       <i class="fas fa-camera icon_modif btn btn-danger btn-sm" id="pick-avatar"   @click="editImage" ></i>
       <!-- afficher l'icone de supresion de profile_picture si exist si nn l'icone sera cacher -->
@@ -41,6 +41,7 @@ export default {
             formData.append('image', image, image.name);
             //Appele l'action 'UPLOAD_IMAGE' , envoyer les doonnées de formulaire au backend 
             this.$store.dispatch('UPLOAD_IMAGE', formData)
+           
             //on recois le message d'erreur dans le catch et puis l'afficher 
             .catch(() => this.uploadPhotoError="photo du profil non mofifiée");
         },
@@ -53,6 +54,7 @@ export default {
         deleteProfilePic(){
           //appele l'action 'DELETE_IMAGE'
          this.$store.dispatch('DELETE_IMAGE')
+        .then(() => this.$refs.fileInput.value='')
         }
     },
   //Recuperer du state(module user) le profile du user et le stoque dans User
