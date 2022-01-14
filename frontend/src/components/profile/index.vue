@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="details">
-                        
+                       <!--  Affichage des infos utilisateurs nom,prénom et bio  -->
                         <h4>{{User.firstName}} {{User.lastName}}<i class="fa fa-sheild"></i></h4>
                         <div>{{User.bio}}</div>
                         <div class="mg-top-10 btn btn-dark" type="button"  @click="showModal = true">
@@ -39,8 +39,11 @@
                  
             </div>
         </div>
-          <div v-if ="myPosts" class="row">  
+
+          <div v-if ="myPosts" class="row"> 
+             <!-- L'utilisation de le boucle for pour parcourir le tableau des posts d'utilisateur myPosts-->
             <div  v-for="post in myPosts" :key="post.id" class="col-md-12">
+              <!-- Afficher les posts utilisateurs  avec le composant AffichePost (../librairie/post/affichePost.vue)  -->
               <affichePost :post = post /> 
             </div>
          </div>
@@ -59,6 +62,7 @@ import Modal from "../librairie/Modal/Modal.vue";
 export default {
 
        data : () => ({
+         ////Initialisation de la variable showModal a false
            showModal: false,
        
        }),
@@ -69,29 +73,30 @@ export default {
             Modal,
          
         },
+        //permet d'obsérver les modification effectuée à la variable 'showModal', (pour eviter d'afficher douuble ascenseur)
          watch : {
                 showModal : function () {
                   
                     if(this.showModal) {
-                      
+                    //Si showModal est à true la propriété css overflow de body passe = hidden 
                         document.body.style.overflow = 'hidden';
                     }
+                    //Si showModal est à false la propriété css overflow de body passe à la valeur par défaut
                     else {
                        document.body.style.overflow = 'auto';
                     }
                 }
             },
           created: function() {
-                // Récupère le profile du user et l'nrregistre dans le store
+                // Récupère le profile du user et l'enregistre dans le store
                 if (this.$store.getters.isAuthenticated) {
+                  //appelle l'action 'GET_MY_POSTS' recupérer le post utilisateur 
                 this.$store.dispatch('GET_MY_POSTS');
                 }
-                // Handling the unauthorized
+               
 
             },
-        methods: {
-       
-    },
+    //Recuperer du state(module user) le profile du user et le stoque dans userProfile ,  les posts utilisateur dans le state (module posts) et le stoque dans myPost
     computed: mapState({ User : state => state.user.profile ,  myPosts : state => state.posts.posts })
 
 }

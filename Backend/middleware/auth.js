@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
  
     // Si l'utilisateur possède une autorisation,
     // on déclare le token et on le vérifie, s'il n'y a pas
-    // d'erreur, on le next, sinon on renvoie un statut 403
+    // d'erreur, on le next, sinon on renvoie un statut 401
     if (authHeader) {
         const token = authHeader.split(' ')[1];
        console.log('authHeader',authHeader)

@@ -8,7 +8,7 @@ const getters = {
 };
 
 const actions = {
-  
+  //Envoie des post 
   SEND_POST: ({commit}, post) => new Promise((response, reject) =>{
     Api.post('posts/add', post)
     .then((res) => {
@@ -17,7 +17,7 @@ const actions = {
     })
     .catch((error) => reject(error.response))
   }),
-
+  //mis à jour du post
   UPDATE_POST : ({commit}, postInfo) => new Promise((response, reject) =>{
     Api.put('posts/'+postInfo.id, postInfo.post)
     .then((res) => {
@@ -26,7 +26,7 @@ const actions = {
     })
     .catch((error) => reject(error.response))
   }),
-
+  //recuperation des posts
   GET_ALL_POST: ({commit}, post) => new Promise((response, reject) =>{
     commit('POSTS_REQUEST')
     Api.get('posts', post)
@@ -41,7 +41,7 @@ const actions = {
                            reject(error.response)
                       })
   }),
-
+//recupertion de posts utilisateur 
   GET_MY_POSTS: ({commit}) => new Promise((response, reject) =>{
     commit('POSTS_REQUEST')
     Api.get('posts/me')
@@ -56,7 +56,7 @@ const actions = {
                            reject(error.response)
                       })
   }),
-
+  ///supression du post 
   DELETE_POST: ({commit}, postId) => new Promise((response, reject) =>{
     Api.delete(`posts/${postId}`)
     .then((res) => {
@@ -76,13 +76,17 @@ AUTH_LOGOUT: state => {
     state.posts=[];
     state.status="";
   },
+//sevgarder nouveau post au debut de tableau 
 SET_NEW_POST: (state, newPost) => {
     state.posts.unshift(newPost);
 },
+//mis à jour du post 
 UPDATE_POST: (state, updatePost) => {
   let index ;
+  //utiliser une boucle
   for(let post of state.posts)
   {
+    //chercher lindex du post dans le tableau puis suprimer et et ajouter nouveau post au debut de tableau 
     if(post.id == updatePost.id) {
      index = state.posts.indexOf(post); 
      state.posts.splice(index,1);
@@ -92,10 +96,12 @@ UPDATE_POST: (state, updatePost) => {
   } 
   
 },
+//supression du post 
 UNSET_POST: (state, postId) => {
 let index ;
  for(let post of state.posts)
  {
+   //chercher l'index du post dans le tableau puis les suprimer 
    if(post.id == postId) {
     index = state.posts.indexOf(post); 
     state.posts.splice(index,1);
@@ -104,6 +110,7 @@ let index ;
  }
 
 },
+//supression du commentaire 
 UNSET_POST_COMMENT: (state, commentId) => {
   let indexPost,indexComment ;
    for(let post of state.posts)
@@ -119,7 +126,7 @@ UNSET_POST_COMMENT: (state, commentId) => {
    }
 
   },
-
+//envoie du nouveau commentaire 
 SET_NEW_POST_COMMENT: (state, newComment) => {
  console.log(newComment.comment)
 let index ;
@@ -134,6 +141,7 @@ let index ;
  }
 
 },
+//mis à jour du commentaire 
 SET_UPDATE_POST_COMMENT:(state,newUpdateCmnt) =>{
 
   let indexPost = state.posts.findIndex(post=> post.id == newUpdateCmnt.PostId);
@@ -142,12 +150,13 @@ SET_UPDATE_POST_COMMENT:(state,newUpdateCmnt) =>{
   state.posts[indexPost].comments.unshift(newUpdateCmnt);
  
 },
+//Ajouter like 
 SET_POST_LIKE:(state ,likeObj)=>{
   
 let indexPost = state.posts.findIndex(post=> post.id == likeObj.postId);
 
 let indexLike = state.posts[indexPost].Likes.findIndex(like=> like.UserId == likeObj.userId)
-
+//si la valeur différent à -1 donc l'utilisateur à déja liker on retire le like si nn on ajout le like au debut de tableau  
 if(indexLike!=-1)
 { 
   state.posts[indexPost].Likes.splice(indexLike,1)
@@ -157,7 +166,7 @@ state.posts[indexPost].Likes.unshift({UserId : likeObj.userId});
 }
 
 },
-
+//ajout dislike
 SET_POST_DISLIKE:(state ,disLikeObj)=>{
   let indexPost = state.posts.findIndex(post=> post.id == disLikeObj.postId);
   let indexDislike = state.posts[indexPost].Dislikes.findIndex(dislike=> dislike.UserId == disLikeObj.userId)

@@ -14,7 +14,7 @@
                         </div>
                         <br>
                         
-                        <input type="file" accept=".jpg, .jpeg, .png"  hidden  @change="handleImageChange">
+                        <input type="file" accept=".jpg, .jpeg, .png"   ref="fileInput" hidden  @change="handleImageChange">
                         <ul class="nav nav-pills float-start">
                             <li><i class="fas fa-camera btn btn-dark ms-2 btn-sm float-start"  @click="editImage" ></i></li>
                         </ul>
@@ -56,15 +56,6 @@ export default {
                             },
                      }
            },     
-    created: function() {
-               
-
-    },
-    components: {
-     
-        },
-
-
     methods: {
      resetError() {
             this.post.error = false
@@ -117,7 +108,12 @@ export default {
             },
         // Permet de réinitialiser les données du post et de ne plus les afficher dans la page html    
         deletePostData() {
-            this.post={}; 
+              this.post.message = '';
+               this.post.link = '';
+              this.post.srcImage = '';
+              this.post.image = '';
+              this.post.error = ''
+             this.$refs.fileInput.value='';
              
         },
         // Permet de supprimer l'image pendant la modification du post 
@@ -125,6 +121,7 @@ export default {
             this.post.srcImage = ""; 
             this.post.image = '';
             this.post.deleteImage= true;
+            this.$refs.fileInput.value='';
              
         },
     },

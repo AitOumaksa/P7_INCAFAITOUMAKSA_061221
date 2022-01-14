@@ -27,9 +27,9 @@
           <li  v-if="isAuthenticated" class="nav-item dropdown" >
             <a class="nav-link dropdown-toggle" href="#" id="dropdown08" data-bs-toggle="dropdown" aria-expanded="false">{{name}}</a>
             <ul class="dropdown-menu" aria-labelledby="dropdown08">
-              <li> <router-link class="dropdown-item" to="/profile">Profile</router-link></li>
+              <li> <router-link class="dropdown-item" to="/profile"><i class="fas fa-user-circle fa-lg"></i></router-link></li>
               <!--Déclencher un event @click si l'utilisateur se deconnecte renvoyer vers la page /login  -->
-              <li  @click="logout"><router-link class="dropdown-item" to="/login">Déconnexion</router-link></li>
+              <li  @click="logout"><router-link class="dropdown-item" to="/login"><i class="fas fa-sign-out-alt fa-lg"></i></router-link></li>
             </ul>
           </li>
         </ul>
@@ -63,7 +63,7 @@ export default {
 
 <style scoped lang="scss">
 .dropdown-menu{
-  min-width: 7.5rem;
+  min-width: 1rem;
 }
 
 </style>

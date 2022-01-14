@@ -5,10 +5,8 @@ const state = {
      status: "" 
 };
 
-const getters = {
- 
-};
 const actions = {
+     //Envoie des like 
      SEND_LIKE: ({commit},like) => new Promise((response, reject) =>{
           Api.post(`posts/${like.postId}/like`)
           .then(() => {
@@ -16,6 +14,7 @@ const actions = {
           })
           .catch((error) => reject(error))
      }),
+     //Envoie dislike
      SEND_DISLIKE: ({commit}, dislike) => new Promise((response, reject) =>{
           Api.post(`posts/${dislike.postId}/dislike`)
           .then(() => {
@@ -40,7 +39,6 @@ LIKE_DIS_ERROR: state => {
 }
 export default {
      state,
-     getters,
      actions,
      mutations
    };

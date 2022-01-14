@@ -7,11 +7,12 @@
         <div class="panel panel-white profile-widget">
             <div class="row">
                 <div class="col-md-12">
-                  <!-- L'importation de composant avatar (../librairie/avatar/avatar.vue)-->
+                  <!-- L'utilisation  de composant avatar (../librairie/avatar/avatar.vue)-->
                    <avatar/> 
                 </div>
                 <div class="col-md-12">
                     <div class="details">
+                       <!-- affichage des info utilisateur -->
                         <h4>{{User.firstName}} {{User.lastName}}</h4>
                         <div>{{User.bio}}</div>
                     </div>
@@ -22,7 +23,7 @@
           <!--  Panneau pour ajouter des post   --> 
          <div class="row">
             <div class="col-md-12 pull-left posttimeline">
-              <!-- importation  de composant ajoutPost (../librairie/post/ajoutPost.vue)-->
+              <!-- L'utilisation  de composant ajoutPost (../librairie/post/ajoutPost.vue)-->
                       <ajoutPost  /> 
                     
                     <!-- Chargement du post --> 

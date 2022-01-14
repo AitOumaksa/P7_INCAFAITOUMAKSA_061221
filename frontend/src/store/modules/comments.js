@@ -8,6 +8,7 @@ const getters = {
 };
 
 const actions = {
+  //ajouter commentaire 
   ADD_COMMENT: ({commit}, info) => new Promise((response, reject) =>{
     commit('COMMENTS_REQUEST')
     Api.post(`posts/${info.postId}/comments`, {"commentmessage" : info.commentmessage})
@@ -20,6 +21,7 @@ const actions = {
        commit('COMMENTS_ERROR');
        reject(error.response.data.error)});
   }),
+  //mis à jour un commentaire 
   UPDATE_COMMENT: ({commit}, editComment) => new Promise((response, reject) =>{
     commit('COMMENTS_REQUEST')
     Api.put(`posts/${editComment.id}/updateCmnt`, {"commentmessage" : editComment.message })
@@ -34,7 +36,7 @@ const actions = {
        console.log(error.response)
        reject(error.response)});
   }),
-
+  //suprimer un commentaire 
   DELETE_COMMENT: ({commit}, commentId) => new Promise((response, reject) =>{
     commit('COMMENTS_REQUEST')
     Api.delete(`posts/comments/${commentId}`)

@@ -17,7 +17,7 @@
                             <div class="mb-3">
                                  <label>Mot de passe</label>
                                 <div class="input-group" id="show_hide_password1">
-                                  <!--L'icone  -->
+                                  <!--L'icone d'affichage ou masquage du mot de passe   -->
                                     <input class="form-control" aria-describedby="button-addon1" v-model="user.password" :type="inputType" autocomplete="on" name="password" required>
                                     <i @click.prevent="showPassword" :class="btnText" id="button-addon1" class="btn btn-dark" aria-hidden="true"></i>
                                      
@@ -59,7 +59,9 @@ export default {
            password : ''
        }
    }),
+
    methods:{ 
+     //Methode pour l'affichage ou masquge du mot de passe 
         showPassword() {
        if(this.inputType === 'password') {
           this.inputType = 'text'
@@ -69,8 +71,9 @@ export default {
           this.btnText = 'far fa-eye'
        }
      },
-       //Methods qui éxecute l'action 'AUTH_REQUEST'
+       //Methods pour la connexion 
     connexion() {
+      //appele l'action 'AUTH_REQUEST'
             this.$store.dispatch('AUTH_REQUEST', this.user)
             .then((res) => {  console.log(res);
             //Redirection vers la route Home en cas de "success" 
@@ -82,6 +85,7 @@ export default {
                
             })
         },
+    //La validation de formulaire avant l'execution de la methode this.connexion
     ValidationForm()
       {
        var form = document.querySelector('.needs-validation')

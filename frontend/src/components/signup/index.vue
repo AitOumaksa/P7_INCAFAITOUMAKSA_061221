@@ -4,6 +4,7 @@
                 <div id="signup-column" class="col-md-6">
                     <div id="signup-box" class="col-md-12 panel">
                         <!-- Formulaire de la route signup -->
+                        <!-- Déclencher l'event @submit  -->
                         <form   @submit.prevent="ValidationForm()" id="signup-form" class="needs-validation" novalidate>
                             <h3 class="text-center">Inscription</h3>
                             <div class="form-group">
@@ -28,6 +29,7 @@
                                 <label>Mot de passe</label>
                                 <div class="input-group" id="show_hide_password">
                                     <input class="form-control" aria-describedby="button-addon2" v-model="newUser.password" :type="inputType" autocomplete="on" name="password" required pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})">  
+                                    <!-- L'icone d'affichage ou massquage du mot de passe  -->
                                     <i @click.prevent="showPassword" :class="btnText" id="button-addon2" class="btn btn-dark" aria-hidden="true"></i>
                                        <div class="valid-feedback">Mot de passe valide</div>
                                      <div class="invalid-feedback">Mot de passe invalide</div>
@@ -92,6 +94,7 @@ export default {
             })
             .catch((error)=>{ this.signupError=error; console.log('erreeor',this.signupError)})
         },
+    //validation de formulaire avant d'executer la methode this.inscription 
     ValidationForm()
       {
        var form = document.querySelector('.needs-validation')

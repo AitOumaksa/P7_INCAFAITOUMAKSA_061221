@@ -4,8 +4,9 @@
     <div class="row">
         <div class="col-md-4 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+              <!-- utilisation de composant avatar  -->
                  <avatar/>
-                <span class="font-weight-bold">{{user.lastName}} {{user.firstName}}</span><!--<span class="text-black-50">{{user.email}}</span>-->
+                <span class="font-weight-bold">{{user.lastName}} {{user.firstName}}</span>
                 <span> </span>
             </div>
             <div class="mt-3 text-center"><button class="btn btn-danger"  @click="deleteProfile" >Supprimer le compte</button></div>
@@ -49,6 +50,7 @@
                               <label>Mot de passe actuel</label>
                               <div class="input-group" id="show_hide_password1">
                               <input class="form-control"  aria-describedby="button-addon2" autocomplete="on" v-model="mdp.password" :type="inputType" placeholder="••••••">
+                               <!-- methode pour le massquage et l'affichage du password  -->
                               <i @click.prevent="showPassword()" :class="btnText" id="button-addon2" class="btn btn-dark" aria-hidden="true"></i>
                               </div>
                             </div>
@@ -89,19 +91,25 @@ export default {
           //Associè à la propriété de la class de l'icone
           btnText: 'far fa-eye' , 
           btnText1: 'far fa-eye' , 
+          //objet  contenant les infos user
            user : {
             firstName : store.state.user.profile.firstName,
             lastName : store.state.user.profile.lastName,
             bio : store.state.user.profile.bio,
             email : store.state.user.profile.email,
            },
+           //objet contenant mdp user l'ancienne et nouveau intialiser à une valeur vide 
            mdp : {
                newPassword :"",
                passsord : ""
            },
+           //message d'erreur de mis à jour des infos
            updateInfoError:"",
+           //message de reussi de mis à jour des infos 
            updateInfoSuccess:false,
+           //message d'erreur de mis à jour de mdp
            updateMdpError:"",
+           //message de reussi de mis à jour mdp
            updateMdpSuccess:false,
        }),
            components: {
@@ -109,6 +117,7 @@ export default {
          
         },
         methods: {
+          //methode pour le massquage et l'affichage du password 
                 showPassword() {
                       if(this.inputType === 'password') {
                           this.inputType = 'text',
@@ -127,21 +136,28 @@ export default {
                           this.btnText1 = 'far fa-eye'
                       }
                   },
-
+                //methode pour la mis à jour des infos users 
                 changerInfos () {
+                  //appele l'action 'UPDATE_USER_INFO'
                      this.$store.dispatch('UPDATE_USER_INFO', this.user)
                      .then(()=> {this.updateInfoSuccess = true ; this.updateInfoError=""})
                      .catch((error) => {this.updateInfoError=error; this.updateInfoSuccess = false });
                 },
+                //methodes pour la mis à jour du password
                   changePassword () {
+                    //appele l'action 'UPDATE_USER_PASSWORDO'
                      this.$store.dispatch('UPDATE_USER_PASSWORD', this.mdp)
                      .then(()=> {this.updateMdpSuccess = true ; this.updateMdpError=""})
                      .catch((error) => {this.updateMdpError=error;this.updateMdpSuccess = false });
                 },
+                //methode pour la supression du profile
                 deleteProfile () {
+                  //afficher une alert pour averti l'utilisateur si il veux suprimer son profile
                    if ( confirm( "Voulez vous supprimer définitivemnt votre profile ?" ) )  
                     {  
+                      //appele l'action 'USER_DELETE_PROFILE'
                         this.$store.dispatch('USER_DELETE_PROFILE', this.user)
+                        //dériger l'utilisateur vers la page home 
                      .then((res)=> {console.log(res);this.$emit('close',true);this.$router.push("/")})
                      .catch((error) => {console.log(error); });
                      }
