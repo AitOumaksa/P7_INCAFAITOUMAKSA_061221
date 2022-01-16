@@ -8,7 +8,7 @@ Backend_Package : (bcrypt, body-parser, crypto-js,dotenv, express , jsonwebtoken
 
 Frontend : VueJS3 + vue-cli + Vuex , bootstrap5 ;
 
-Frontend_Package : (axios , moment , vue-router , Vuex)
+Frontend_Package : (axios , moment , vue-router , Vuex, Fontawesome)
 ## Back-end :
 
 npm install

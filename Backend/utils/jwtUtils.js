@@ -12,7 +12,7 @@ module.exports = {
     },
       this.tokenSign,
       {
-        expiresIn: '24h'
+        expiresIn: '1h'
       })
   },
   getUserId: function (data) {
